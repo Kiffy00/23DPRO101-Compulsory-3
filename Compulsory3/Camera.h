@@ -12,6 +12,7 @@ public:
     glm::vec3 front;
     glm::vec3 up;
 
+    float height{1.0f};
     float yaw;
     float pitch;
     float movementSpeed{ 2.f };
@@ -20,6 +21,8 @@ public:
     float farClip{ 100.f };
     float FoV{ 75 };
     bool disableInput{ false };
+
+    BaryUtility baryUtility;
 
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), 
         glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f), 
@@ -84,6 +87,7 @@ public:
                 break;
             }
         }
+        newPosition.y = baryUtility.getTerrainHeightAt(newPosition) + height;
         position = newPosition;
 
         if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) pitch += lookSensitivity * deltaTime;

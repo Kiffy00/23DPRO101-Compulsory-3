@@ -1,5 +1,9 @@
 #include <glm/glm.hpp>
 #include <iostream>
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_glfw.h"
+#include "ImGui/imgui_impl_opengl3.h" 
+
 
 #include "Renderer.h"
 
@@ -34,13 +38,22 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    // Initialize ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    // Setup Platform/Renderer backends
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
     Renderer renderer;
     renderer.setAspect(SCR_WIDTH, SCR_HEIGHT);
     Camera gameCamera;
-    int test = 0;
-    GameState gameState(test);
+    GameState gameState(0);
     gameState.initializeObjects(gameCamera);
-
+    gameCamera.baryUtility.initialize(gameState.objects.front()->model.getVertices(), 
+                                        gameState.objects.front()->model.getIndices(), 
+                                        gameState.objects.front()->getModelMatrix());
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
 
@@ -50,12 +63,32 @@ int main(int argc, char** argv) {
     while (!glfwWindowShouldClose(window)) {
         gameCamera.processInput(window, deltaTime, lastFrame, gameState.getAllColliders());
 
+        // Start ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        ImGui::Begin("Light", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove);
+        ImGui::SetWindowPos(ImVec2(SCR_WIDTH - ImGui::GetWindowWidth(), 0)); // Top right
+        ImGui::ColorEdit3("Color", glm::value_ptr(renderer.lightColor));
+        ImGui::SliderFloat3("Position", glm::value_ptr(renderer.lightPos), -10.0f, 10.0f);
+        ImGui::End();
+
+        // Camera height control window (new)
+        ImGui::Begin("Camera", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove);
+        ImGui::SetWindowPos(ImVec2(0, 0)); // Top left
+        ImGui::SliderFloat("Height", &gameCamera.height, 0.0f, 5.0f);
+        ImGui::End();
+
+        // Render ImGui
+        ImGui::Render();
         glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Update all objects and render
+        // Update and render all objects
         gameState.update(deltaTime, gameCamera, window);
         gameState.renderAll(renderer, gameCamera);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
         glfwPollEvents();

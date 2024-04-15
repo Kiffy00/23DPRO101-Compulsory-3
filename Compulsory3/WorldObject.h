@@ -7,6 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "BinaryVertexModel.h"
 #include "BoxCollider.h"
+#include "BaryUtility.h"
+
 class Renderer;
 
 enum GLObjectEnum {
@@ -20,9 +22,10 @@ public:
     glm::vec3 position;
     glm::vec3 scale;
     glm::vec3 rotationAxis; // Axis for rotation
-    float rotationAngle; // Rotation angle in euler
+    float rotationAngle;    // Rotation angle in euler
     BVM model;
     std::vector<BoxCollider> colliders;
+    BaryUtility baryUtility;
 
     WorldObject(BVM& model, const glm::vec3& pos = glm::vec3(0.0f), const glm::vec3& scale = glm::vec3(1.f), const glm::vec3& rotAxis = glm::vec3(0.f, 1.f, 0.f), float rotAngle = 0.0f);
 
@@ -68,6 +71,10 @@ public:
             collider.minPoint += delta;
             collider.maxPoint += delta;
         }
+    }
+
+    float getTerrainHeight() {
+        return baryUtility.getTerrainHeightAt(position);
     }
 
 private:

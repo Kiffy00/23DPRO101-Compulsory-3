@@ -128,11 +128,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaryUtility.cpp" />
     <ClCompile Include="BinaryVertexModel.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Compulsory3.cpp" />
     <ClCompile Include="Dependencies\includes\glm\detail\glm.cpp" />
+    <ClCompile Include="Dependencies\includes\ImGui\imgui.cpp" />
+    <ClCompile Include="Dependencies\includes\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\includes\ImGui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Dependencies\includes\ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\includes\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\includes\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="glad.c" />
@@ -143,6 +150,7 @@
     <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaryUtility.h" />
     <ClInclude Include="BinaryVertexModel.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Camera.h" />
@@ -431,6 +439,15 @@
     <ClInclude Include="Dependencies\includes\glm\vec3.hpp" />
     <ClInclude Include="Dependencies\includes\glm\vec4.hpp" />
     <ClInclude Include="Dependencies\includes\glm\vector_relational.hpp" />
+    <ClInclude Include="Dependencies\includes\ImGui\imconfig.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imgui.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imgui_impl_glfw.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\includes\ImGui\imstb_truetype.h" />
     <ClInclude Include="Dependencies\includes\KHR\khrplatform.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />

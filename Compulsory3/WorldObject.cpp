@@ -5,4 +5,4 @@ WorldObject::WorldObject(BVM& model, const glm::vec3& pos, const glm::vec3& scal
     : position(pos), scale(scale), rotationAxis(rotAxis), rotationAngle(rotAngle), model(model)
 {
     ShaderHelper::setupObjects(VAO, VBO, EBO, model.getVertices(), model.getIndices());
-}
+} 

@@ -7,6 +7,7 @@
 #include "Vertex.h"
 
 class BVM { // Binary Vertex Model (custom format)
+public:
     const std::string magicHeader = "BVM";
     std::vector<Vertex3D> vertices;
     std::vector<unsigned int> indices;

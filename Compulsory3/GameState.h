@@ -15,7 +15,7 @@ public:
     unsigned int numTrophies{ 0 };
     unsigned int trophiesCollected{ 0};
 
-    GameState(int& numTrophies) : numTrophies(numTrophies) {}
+    GameState(int numTrophies) : numTrophies(numTrophies) {}
 
     void addObject(const std::shared_ptr<WorldObject>& object) {
         objects.push_back(object);

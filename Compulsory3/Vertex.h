@@ -2,9 +2,9 @@
 #define VERTEX_H
 class Vertex3D {
 public:
-    float x, y, z;
-    float r, g, b;
-    float nx, ny, nz;
+    float x, y, z;    // Position
+    float r, g, b;    // Color
+    float nx, ny, nz; // Normal
 
     // Default constructor
     Vertex3D() : x(0), y(0), z(0), r(0), g(0), b(0), nx(0), ny(0), nz(0) {}

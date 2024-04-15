@@ -14,10 +14,6 @@ void Renderer::render(const std::shared_ptr<WorldObject>& worldObject, const Cam
     glUseProgram(shaderProgram);
     updateUniforms(camera);
 
-    // Light properties are simply hardcoded here
-    glm::vec3 lightPos = glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-
     glUniform3fv(glGetUniformLocation(shaderProgram, "lightPos"), 1, glm::value_ptr(lightPos));
     glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, glm::value_ptr(camera.position));
     glUniform3fv(glGetUniformLocation(shaderProgram, "lightColor"), 1, glm::value_ptr(lightColor));

@@ -39,7 +39,6 @@ void GameState::initializeObjects(Camera& camera) {
         glm::vec3(5.0f)               // Scale
     );
 
-
     BVM npcModel("npc.bvm");
     auto npc = std::make_shared<NPC>(
         npcModel,
@@ -49,28 +48,41 @@ void GameState::initializeObjects(Camera& camera) {
         0.f,                           // Euler rotation angle
         0.1f                           // Speed
     );
-    npc->pathPoints = std::vector<glm::vec3> { //NPC path points
+    npc->pathPoints = std::vector<glm::vec3> { // NPC path points
     glm::vec3(-5.f, -0.45f, 5.f),
     glm::vec3(-2.f, -0.45f, -2.f),
     glm::vec3(2.f, -0.45f, -2.f),
     glm::vec3(5.f, -0.45f, -5.f)
     };
+    npc->baryUtility.initialize(terrainModel.getVertices(), terrainModel.getIndices(), terrain->getModelMatrix());
+
     BVM objectModel("npc.bvm");
     auto object1 = std::make_shared<WorldObject>(
         objectModel,
-        glm::vec3(2.0f, -0.8f, 1.0f), // Position
+        glm::vec3(2.0f, -0.8f, 1.5f), // Position
         glm::vec3(1.0f)               // Scale
     );
     auto object2 = std::make_shared<WorldObject>(
         objectModel,
-        glm::vec3(5.0f, -0.8f, -1.0f), // Position
-        glm::vec3(1.0f)               // Scale
+        glm::vec3(7.0f, -0.8f, -3.0f), // Position
+        glm::vec3(1.0f)                // Scale
     );
     auto object3 = std::make_shared<WorldObject>(
         objectModel,
-        glm::vec3(-3.0f, -0.8f, -5.0f), // Position
-        glm::vec3(1.0f)               // Scale
+        glm::vec3(-3.0f, -0.8f, -6.0f), // Position
+        glm::vec3(1.0f),                // Scale
+        glm::vec3(0.0f, 1.0f, 0.0f),    // Rotation Axis
+        60.f                            // Rotation Angle (Euler)
     );
+
+    object1->baryUtility.initialize(terrainModel.getVertices(), terrainModel.getIndices(), terrain->getModelMatrix());
+    object2->baryUtility.initialize(terrainModel.getVertices(), terrainModel.getIndices(), terrain->getModelMatrix());
+    object3->baryUtility.initialize(terrainModel.getVertices(), terrainModel.getIndices(), terrain->getModelMatrix());
+
+    object1->position.y = object1->getTerrainHeight() + 1; // TODO: remove these loitering constants
+    object2->position.y = object2->getTerrainHeight() + 1; // TODO: remove these loitering constants
+    object3->position.y = object3->getTerrainHeight() + 1; // TODO: remove these loitering constants
+
 
     addObject(terrain);
     addObject(npc);

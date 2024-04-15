@@ -3,6 +3,9 @@
 void NPC::update(float deltaTime) {
     followCurve(deltaTime);
     position = calculateLagrangePosition(this->pathPoints, t);
+
+    // Map to terrain
+    position.y = baryUtility.getTerrainHeightAt(position) + (1.0 * scale.x); 
 }
 
 void NPC::followCurve(float deltaTime) {

@@ -18,6 +18,10 @@ public:
     void render(const std::shared_ptr<WorldObject>& worldObject, const Camera& camera);
     void cleanup();
     void setAspect(unsigned int width, unsigned int height) { SCR_HEIGHT = static_cast<float>(height); SCR_WIDTH = static_cast<float>(width); }
+
+    glm::vec3 lightPos = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+
 private:
     GLuint shaderProgram;
     GLint viewLoc, projLoc;
