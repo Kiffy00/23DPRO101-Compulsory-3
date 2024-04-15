@@ -102,7 +102,7 @@ public:
         front = glm::normalize(direction);
     }
 
-    // Members and methods for camera snap //
+    // Members and methods for camera snap
     glm::vec3 savedPosition;
     glm::vec3 savedFront;
     glm::vec3 savedUp;
@@ -117,6 +117,5 @@ public:
         front = savedFront;
         up = savedUp;
     }
-    // Members and methods for camera snap //
 };
 #endif

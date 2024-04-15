@@ -74,7 +74,6 @@ int main(int argc, char** argv) {
         ImGui::SliderFloat3("Position", glm::value_ptr(renderer.lightPos), -10.0f, 10.0f);
         ImGui::End();
 
-        // Camera height control window (new)
         ImGui::Begin("Camera", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove);
         ImGui::SetWindowPos(ImVec2(0, 0)); // Top left
         ImGui::SliderFloat("Height", &gameCamera.height, 0.0f, 5.0f);

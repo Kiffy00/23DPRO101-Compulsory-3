@@ -52,7 +52,7 @@ public:
     }
     // Render all world objects in the game state
     void renderAll(Renderer& renderer, Camera& camera);
-
+    // Arbitrary initialization of world and game objects
     void initializeObjects(Camera& camera);
 
     void killAllObjects() {
